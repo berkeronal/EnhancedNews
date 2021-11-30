@@ -8,13 +8,13 @@ import com.berker.enhancednews.domain.model.News
 data class NewsEntity(
     @PrimaryKey val id: Int? = null,
     val insertedDate: Long,
-    val articleList: List<ArticlesEntity>,
     val status: String,
     val totalResults: Int
 ){
     fun toNews(): News {
         return News(
-            articles = articleList.map { it.toArticle() },
+            //TODO
+            articles = emptyList(),
             status = status,
             totalResults = totalResults
         )

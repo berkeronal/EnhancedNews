@@ -10,7 +10,7 @@ data class NewsEntity(
     val insertedDate: Long,
     val status: String,
     val totalResults: Int
-){
+) {
     fun toNews(): News {
         return News(
             //TODO

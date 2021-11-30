@@ -1,12 +1,16 @@
 package com.berker.enhancednews.data.local.entity
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.berker.enhancednews.data.local.entity.relations.NewsAndArticles
 
 @Dao
 interface EnhancedNewsDao {
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNews(news: NewsEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertArticles(articlesList: List<ArticlesEntity>)
 
     @Query("SELECT * FROM newsentity WHERE  id=(SELECT max(id) FROM newsentity)")
     suspend fun getNews(): List<NewsEntity>
@@ -21,6 +25,7 @@ interface EnhancedNewsDao {
     suspend fun deleteArticles()
 
     @Transaction
-    @Query("SELECT * FROM newsentity WHERE id = :newsId")
-    suspend fun getNewsWithArticles(newsId: Int): List<NewsAndArticles>
+    @Query("SELECT * FROM newsentity WHERE id = (SELECT max(id) FROM newsentity)")
+    suspend fun getNewsWithArticles(): List<NewsAndArticles>
+
 }

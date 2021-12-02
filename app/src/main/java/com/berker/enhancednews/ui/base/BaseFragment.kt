@@ -28,7 +28,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
     }
 
-    open fun initUi() {}
+    abstract fun initUi()
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

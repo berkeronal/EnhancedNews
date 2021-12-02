@@ -26,7 +26,11 @@ class EnhancedNewsRepositoryImpl(
         //TODO("Bilenlere danış")
         //TODO("getNewsWithArticles kullan")
         val news = dao.getNews()
-        val articles = dao.getArticles(newsId = news.last().id ?: -1)
+        val articles = if (!news.isNullOrEmpty()) {
+            dao.getArticles(newsId = news.last().id ?: -1)
+        } else {
+            emptyList()
+        }
         val createdNewsList = getDataFromDb(news, articles)
 
         emit(Resource.Loading(data = createdNewsList))
@@ -47,21 +51,11 @@ class EnhancedNewsRepositoryImpl(
             dao.insertNews(newNewsObject)
             val lastNewsObject = dao.getNews()
             dao.insertArticles(remoteNews.articles.map {
-                ArticlesEntity(
-                    author = it.author,
-                    content = it.content,
-                    description = it.description,
-                    publishedAt = it.publishedAt,
-                    source = it.source.name,
-                    title = it.title,
-                    url = it.url,
-                    urlToImage = it.urlToImage,
-                    lastNewsObject.last().id ?: -1
-                )
+                it.toArticleEntity(lastNewsObject.last().id ?: -1)
             })
             //Single Source Of Truth pattern
             val newInsertedNews = dao.getNews()
-            val newInsertedArticles = dao.getArticles(newsId = news.last().id ?: -1)
+            val newInsertedArticles = dao.getArticles(newsId = lastNewsObject.last().id ?: -1)
             val readNewNews = getDataFromDb(newInsertedNews, newInsertedArticles)
             emit(Resource.Success(readNewNews))
         } catch (e: HttpException) {

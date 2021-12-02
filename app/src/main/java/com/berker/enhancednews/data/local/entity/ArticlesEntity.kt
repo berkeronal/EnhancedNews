@@ -6,9 +6,9 @@ import com.berker.enhancednews.domain.model.Article
 
 @Entity
 data class ArticlesEntity(
-    val author: String,
-    val content: String,
-    val description: String,
+    val author: String?,
+    val content: String?,
+    val description: String?,
     val publishedAt: String,
     val source: String,
     val title: String,

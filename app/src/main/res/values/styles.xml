@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="rv_textview">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textOther</item>
+        <item name="android:textSize">@dimen/rv_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="rv_header_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textColor">@color/textMain</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="rv_imageview">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:contentDescription">@{article.title}</item>
+    </style>
+</resources>

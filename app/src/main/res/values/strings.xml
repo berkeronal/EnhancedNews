@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Enhanced News</string>
+    <style name="rounderCorner" >
+        <item name="cornerSize">10%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
 </resources>

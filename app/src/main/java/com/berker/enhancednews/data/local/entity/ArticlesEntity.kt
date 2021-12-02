@@ -13,7 +13,7 @@ data class ArticlesEntity(
     val source: String,
     val title: String,
     val url: String,
-    val urlToImage: String,
+    val urlToImage: String?,
     val newsId: Int,
     @PrimaryKey val id: Int? = null
 ){

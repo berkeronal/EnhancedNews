@@ -67,6 +67,11 @@ class NewsListViewHolder(
                     guideLine = glVerticalRight
                 )
             }else{
+                changeGlPercentage(
+                    0.7f,
+                    constraintLayout = clRvItem,
+                    guideLine = glVerticalRight
+                )
                 imgNews.setImage(article.urlToImage)
             }
         }

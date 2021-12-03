@@ -65,12 +65,12 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgNews"
+                style="@style/rv_imageview"
                 app:layout_constraintBottom_toTopOf="@+id/glBottomHorizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/glVerticalRight"
                 app:layout_constraintTop_toTopOf="@+id/txtSource"
-                app:shapeAppearanceOverlay="@style/rounderCorner"
-                style="@style/rv_imageview" />
+                app:shapeAppearanceOverlay="@style/rounderCorner" />
 
             <TextView
                 android:id="@+id/txtTime"

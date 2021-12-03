@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Enhanced News</string>
     <string name="image">Image</string>
+    <string name="briefing_header">Briefing notifications</string>
+    <string name="briefing_content">Get notified when your daily briefing is ready each morning</string>
+    <string name="briefing_subscribe">SUBSCRIBE</string>
+    <string name="briefing_no_thanks">NO THANKS</string>
 
     <style name="rounderCorner" >
         <item name="cornerSize">10%</item>

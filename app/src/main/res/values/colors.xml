@@ -15,4 +15,5 @@
     <color name="textOther">#b9b8bf</color>
     <color name="bottomBorder">#37383f</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="text_button_blue">#51A6EA</color>
 </resources>

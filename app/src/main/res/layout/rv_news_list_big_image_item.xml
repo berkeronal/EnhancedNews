@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,7 +13,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvRootCard"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/rv_list_item_height"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/customBackground"
         app:cardCornerRadius="0dp">
 
@@ -29,53 +30,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.25" />
+                app:layout_constraintGuide_percent="0.8" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/glBottomHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.75" />
+                app:layout_constraintGuide_percent="0.9" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/glVerticalRight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.7" />
+                app:layout_constraintGuide_percent="1" />
 
             <TextView
                 android:id="@+id/txtSource"
                 style="@style/rv_textview"
+                android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
                 android:text="@{article.source}"
-                app:layout_constraintBottom_toTopOf="@+id/glTopHorizontal"
-                app:layout_constraintEnd_toStartOf="@+id/glVerticalRight"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgNews" />
 
             <TextView
                 android:id="@+id/txtHeader"
-                style="@style/rv_header_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="@{article.title}"
-                app:layout_constraintBottom_toTopOf="@+id/glBottomHorizontal"
-                app:layout_constraintEnd_toStartOf="@+id/glVerticalRight"
+                android:textColor="@color/textMain"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/glTopHorizontal" />
+                app:layout_constraintTop_toBottomOf="@+id/txtSource"
+                tools:text="v asdasdasdasdasdasd asdasdasdasdasdasd asdasdasdasdasdasd" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgNews"
-                style="@style/rv_imageview"
-                app:layout_constraintBottom_toTopOf="@+id/glBottomHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/glVerticalRight"
-                app:layout_constraintTop_toTopOf="@+id/txtSource"
-                app:shapeAppearanceOverlay="@style/rounderCorner" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtTime"
                 style="@style/rv_textview"
-                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
                 android:text="@{article.publishedAt}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtHeader" />

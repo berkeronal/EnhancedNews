@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvRootCard"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/rv_list_notification_item_height"
+        app:cardBackgroundColor="@color/customBackground"
+        app:cardCornerRadius="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clRvItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_bottom"
+            android:paddingLeft="@dimen/applicationPadding"
+            android:paddingRight="@dimen/applicationPadding">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glTopHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glHorizontalCenter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.6" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glBottomHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.80" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glVertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <TextView
+                android:id="@+id/txtHeader"
+                style="@style/rv_header_text"
+                android:layout_height="wrap_content"
+                android:text="@string/briefing_header"
+                app:layout_constraintBottom_toTopOf="@+id/glTopHorizontal"
+                app:layout_constraintEnd_toStartOf="@+id/glVertical"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/briefing_content"
+                android:textColor="@color/textOther"
+                app:layout_constraintBottom_toTopOf="@+id/glHorizontalCenter"
+                app:layout_constraintEnd_toStartOf="@+id/glVertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/glTopHorizontal" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/materialButton2"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/briefing_subscribe"
+                android:textColor="@color/text_button_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/materialButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/glHorizontalCenter" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/materialButton"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="16sp"
+                android:text="@string/briefing_no_thanks"
+                android:textColor="@color/text_button_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/materialButton2"
+                app:layout_constraintTop_toTopOf="@+id/glHorizontalCenter" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/image"
+                app:layout_constraintBottom_toTopOf="@+id/glBottomHorizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/glVertical"
+                app:layout_constraintTop_toTopOf="@+id/txtHeader"
+                app:srcCompat="@drawable/news" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

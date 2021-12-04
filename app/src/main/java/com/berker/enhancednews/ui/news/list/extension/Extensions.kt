@@ -8,6 +8,6 @@ fun ShapeableImageView.setImage(url: String) {
     Glide.with(context)
         .load(url)
         .centerCrop()
-        .placeholder(R.drawable.ic_launcher_foreground)
+        .placeholder(R.drawable.news)
         .into(this)
 }

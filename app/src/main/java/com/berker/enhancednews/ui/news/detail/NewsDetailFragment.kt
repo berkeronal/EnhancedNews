@@ -18,17 +18,6 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getArticle()
-        arguments?.let {
-        }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            NewsDetailFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
     }
 
     override fun layoutId(): Int = R.layout.fragment_news_detail
@@ -40,11 +29,9 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding>() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        if (null == getShareIntent().resolveActivity(requireActivity().packageManager)) {
-            return
+        if (null != getShareIntent().resolveActivity(requireActivity().packageManager)) {
+            inflater.inflate(R.menu.share_menu, menu)
         }
-        inflater.inflate(R.menu.share_menu, menu)
-
     }
 
     private fun initActionMenu() {
@@ -52,7 +39,7 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding>() {
     }
 
     private fun getShareIntent(): Intent {
-        return ShareCompat.IntentBuilder.from(requireActivity())
+        return ShareCompat.IntentBuilder(requireActivity())
             .setText(article.title)
             .setType("text/plain")
             .intent
@@ -63,7 +50,10 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        shareSuccess()
+        when (item.itemId) {
+            R.id.share -> shareSuccess()
+
+        }
         return super.onOptionsItemSelected(item)
     }
 

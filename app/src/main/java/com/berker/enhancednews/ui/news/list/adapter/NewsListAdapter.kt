@@ -82,13 +82,17 @@ class NewsListAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (position == 0) {
-            return 0
+        return when (position) {
+            0, 3, 9, 11, 12 -> {
+                0
+            }
+            notificationPosition -> {
+                2
+            }
+            else -> {
+                1
+            }
         }
-        if (position == notificationPosition) {
-            return 2
-        }
-        return 1
     }
 
     private fun setFadeAnimation(view: View) {

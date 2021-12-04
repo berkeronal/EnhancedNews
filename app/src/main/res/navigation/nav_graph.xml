@@ -17,9 +17,6 @@
         android:id="@+id/newsDetailFragment"
         android:name="com.berker.enhancednews.ui.news.detail.NewsDetailFragment"
         android:label="NewsDetailFragment">
-        <action
-            android:id="@+id/action_newsDetailFragment_to_newsListFragment"
-            app:destination="@id/newsListFragment" />
         <argument
             android:name="article"
             app:argType="com.berker.enhancednews.domain.model.Article" />

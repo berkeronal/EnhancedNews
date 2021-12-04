@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="applicationPadding">20dp</dimen>
+    <dimen name="applicationPaddingHalf">10dp</dimen>
     <dimen name="corner_radius">125dp</dimen>
     <dimen name="rv_padding">8dp</dimen>
     <dimen name="rv_text_size">11sp</dimen>
     <dimen name="rv_list_item_height">160dp</dimen>
     <dimen name="rv_list_notification_item_height">160dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">0dp</dimen>
 </resources>

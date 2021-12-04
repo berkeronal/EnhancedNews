@@ -1,8 +1,8 @@
 package com.berker.enhancednews.common.util
 
 object Constants {
-    const val COUNTRY = "tr"
-    const val API_KEY = "78bfadd8812c42cabccff7bec0256726"
+    const val COUNTRY = "ca"
+    const val API_KEY = "73b3dab6d7064f30afc8b23686c796a8"
     const val PAGE_SIZE = "20"
     const val DB_NAME = "ENHANCED_NEWS_DATABASE"
     const val DB_VERSION = 2

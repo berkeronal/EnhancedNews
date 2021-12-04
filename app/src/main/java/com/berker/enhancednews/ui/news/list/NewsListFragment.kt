@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.RecyclerView
 import com.berker.enhancednews.R
+import com.berker.enhancednews.common.util.Constants
 import com.berker.enhancednews.databinding.FragmentNewsListBinding
 import com.berker.enhancednews.domain.model.News
 import com.berker.enhancednews.ui.base.BaseFragment
@@ -28,7 +29,11 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>() {
         NewsListAdapter().apply {
             stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             itemClickListener = {
-                findNavController().navigate(NewsListFragmentDirections.actionNewsListFragmentToNewsDetailFragment(it))
+                findNavController().navigate(
+                    NewsListFragmentDirections.actionNewsListFragmentToNewsDetailFragment(
+                        it
+                    )
+                )
             }
         }
     }
@@ -47,6 +52,20 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>() {
                 if (it.news.isNotEmpty()) {
                     setRvData(it.news.last())
                 }
+            }
+        }
+        with(binding) {
+            business.setOnClickListener {
+                viewModel.getNewsByCategory(Constants.Categories.BUSINESS.value)
+            }
+            sport.setOnClickListener {
+                viewModel.getNewsByCategory(Constants.Categories.SPORTS.value)
+            }
+            technology.setOnClickListener {
+                viewModel.getNewsByCategory(Constants.Categories.TECHNOLOGY.value)
+            }
+            health.setOnClickListener {
+                viewModel.getNewsByCategory(Constants.Categories.HEALTH.value)
             }
         }
     }

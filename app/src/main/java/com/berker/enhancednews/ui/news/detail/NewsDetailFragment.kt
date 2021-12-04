@@ -11,6 +11,7 @@ import com.berker.enhancednews.R
 import com.berker.enhancednews.databinding.FragmentNewsDetailBinding
 import com.berker.enhancednews.domain.model.Article
 import com.berker.enhancednews.ui.base.BaseFragment
+import com.berker.enhancednews.ui.news.list.extension.setImage
 
 
 class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding>() {
@@ -23,8 +24,13 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding>() {
     override fun layoutId(): Int = R.layout.fragment_news_detail
 
     override fun initUi() {
-        Toast.makeText(requireContext(), "${article.content}", Toast.LENGTH_SHORT).show()
         initActionMenu()
+
+        with(binding) {
+            tvHeader.text = article.title
+            ivNews.setImage(article.urlToImage ?: "")
+            tvContent.text = article.content
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

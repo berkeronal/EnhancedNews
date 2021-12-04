@@ -2,7 +2,9 @@ package com.berker.enhancednews.ui.news.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.berker.enhancednews.common.util.Object.widgetArticle
 import com.berker.enhancednews.common.util.Resource
+import com.berker.enhancednews.domain.model.Article
 import com.berker.enhancednews.domain.usecase.NewsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -20,9 +22,11 @@ class NewsListViewModel @Inject constructor(
     val newsListSate: StateFlow<NewsListState> = _newsListSate
 
     private var getNewsJob: Job? = null
+
     init {
         getNews()
     }
+
     fun getNews() {
         getNewsJob?.cancel()
         getNewsJob = newsUseCases.getNewsUseCase()
@@ -46,6 +50,7 @@ class NewsListViewModel @Inject constructor(
                             news = result.data ?: emptyList(),
                             isLoading = false
                         )
+                        widgetArticle = result.data?.last()?.articles?.last() ?: Article("","","","","","","","")
                     }
                 }
             }.launchIn(viewModelScope)

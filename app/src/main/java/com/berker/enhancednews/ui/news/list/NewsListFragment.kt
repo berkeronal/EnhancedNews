@@ -1,9 +1,15 @@
 package com.berker.enhancednews.ui.news.list
 
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.RecyclerView
 import com.berker.enhancednews.R
 import com.berker.enhancednews.databinding.FragmentNewsListBinding
@@ -22,7 +28,7 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>() {
         NewsListAdapter().apply {
             stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             itemClickListener = {
-                //TODO(navigate)
+                findNavController().navigate(NewsListFragmentDirections.actionNewsListFragmentToNewsDetailFragment(it))
             }
         }
     }
@@ -30,7 +36,8 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>() {
     override fun layoutId(): Int = R.layout.fragment_news_list
     override fun initUi() {
         initRecyclerView()
-        viewModel.getNews()
+        initOverflowMenu()
+        //viewModel.getNewsByCategory(Constants.Categories.SPORTS.value)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.newsListSate.flowWithLifecycle(
@@ -43,6 +50,25 @@ class NewsListFragment : BaseFragment<FragmentNewsListBinding>() {
             }
         }
     }
+
+    private fun initOverflowMenu() {
+        setHasOptionsMenu(true)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            requireView().findNavController()
+        ) || super.onOptionsItemSelected(item)
+
+    }
+
 
     private fun setRvData(news: News) {
         newsListAdapter.updateData(news.articles)

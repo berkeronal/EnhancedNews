@@ -14,9 +14,10 @@ data class ArticlesEntity(
     val title: String,
     val url: String,
     val urlToImage: String?,
-    val newsId: Int,
+    var newsId: Int,
+    val category: String,
     @PrimaryKey val id: Int? = null
-){
+) {
     fun toArticle(): Article {
         return Article(
             author = author,

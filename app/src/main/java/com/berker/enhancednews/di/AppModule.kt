@@ -8,6 +8,7 @@ import com.berker.enhancednews.data.remote.NewsApi
 import com.berker.enhancednews.data.remote.NewsApi.Companion.BASE_URL
 import com.berker.enhancednews.data.repository.EnhancedNewsRepositoryImpl
 import com.berker.enhancednews.domain.repository.EnhancedNewsRepository
+import com.berker.enhancednews.domain.usecase.GetNewsByCategoryUseCase
 import com.berker.enhancednews.domain.usecase.GetNewsUseCase
 import com.berker.enhancednews.domain.usecase.NewsUseCases
 import dagger.Module
@@ -26,7 +27,8 @@ object AppModule {
     @Singleton
     fun provideNewsUseCases(repository: EnhancedNewsRepository): NewsUseCases {
         return NewsUseCases(
-            getNewsUseCase = GetNewsUseCase(repository)
+            getNewsUseCase = GetNewsUseCase(repository),
+            getNewsByCategoryUseCase = GetNewsByCategoryUseCase(repository)
         )
     }
 

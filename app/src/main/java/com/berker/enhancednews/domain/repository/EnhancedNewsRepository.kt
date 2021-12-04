@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface EnhancedNewsRepository {
 
     fun getNews(): Flow<Resource<List<News>>>
+    fun getNewsByCategory(category: String): Flow<Resource<List<News>>>
 }

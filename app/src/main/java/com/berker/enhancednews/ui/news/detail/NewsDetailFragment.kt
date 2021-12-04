@@ -1,14 +1,23 @@
 package com.berker.enhancednews.ui.news.detail
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.core.app.ShareCompat
 import com.berker.enhancednews.R
 import com.berker.enhancednews.databinding.FragmentNewsDetailBinding
+import com.berker.enhancednews.domain.model.Article
 import com.berker.enhancednews.ui.base.BaseFragment
 
 
 class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding>() {
+    private lateinit var article: Article
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getArticle()
         arguments?.let {
         }
     }
@@ -25,5 +34,41 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding>() {
     override fun layoutId(): Int = R.layout.fragment_news_detail
 
     override fun initUi() {
+        Toast.makeText(requireContext(), "${article.content}", Toast.LENGTH_SHORT).show()
+        initActionMenu()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        if (null == getShareIntent().resolveActivity(requireActivity().packageManager)) {
+            return
+        }
+        inflater.inflate(R.menu.share_menu, menu)
+
+    }
+
+    private fun initActionMenu() {
+        setHasOptionsMenu(true)
+    }
+
+    private fun getShareIntent(): Intent {
+        return ShareCompat.IntentBuilder.from(requireActivity())
+            .setText(article.title)
+            .setType("text/plain")
+            .intent
+    }
+
+    private fun shareSuccess() {
+        startActivity(getShareIntent())
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        shareSuccess()
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun getArticle() {
+        val args = arguments?.let { NewsDetailFragmentArgs.fromBundle(it) }
+        article = args?.article!!
     }
 }

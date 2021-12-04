@@ -10,7 +10,9 @@ interface NewsApi {
     suspend fun getNews(
         @Query("country") country: String,
         @Query("apiKey") apiKey: String,
-        @Query("pageSize") itemCount: String
+        @Query("pageSize") itemCount: String,
+        @Query("category") category: String?,
+
     ): NewsDto
 
     companion object {

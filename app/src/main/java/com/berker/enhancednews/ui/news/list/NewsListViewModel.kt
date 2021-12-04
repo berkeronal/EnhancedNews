@@ -20,10 +20,40 @@ class NewsListViewModel @Inject constructor(
     val newsListSate: StateFlow<NewsListState> = _newsListSate
 
     private var getNewsJob: Job? = null
-
+    init {
+        getNews()
+    }
     fun getNews() {
         getNewsJob?.cancel()
         getNewsJob = newsUseCases.getNewsUseCase()
+            .onEach { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        _newsListSate.value = newsListSate.value.copy(
+                            news = result.data ?: emptyList(),
+                            isLoading = false,
+                            isError = true
+                        )
+                    }
+                    is Resource.Loading -> {
+                        _newsListSate.value = newsListSate.value.copy(
+                            news = result.data ?: emptyList(),
+                            isLoading = true
+                        )
+                    }
+                    is Resource.Success -> {
+                        _newsListSate.value = newsListSate.value.copy(
+                            news = result.data ?: emptyList(),
+                            isLoading = false
+                        )
+                    }
+                }
+            }.launchIn(viewModelScope)
+    }
+
+    fun getNewsByCategory(category: String) {
+        getNewsJob?.cancel()
+        getNewsJob = newsUseCases.getNewsByCategoryUseCase(category)
             .onEach { result ->
                 when (result) {
                     is Resource.Error -> {

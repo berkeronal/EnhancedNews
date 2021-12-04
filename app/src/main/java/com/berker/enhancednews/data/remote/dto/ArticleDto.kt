@@ -26,7 +26,7 @@ data class ArticleDto(
         )
     }
 
-    fun toArticleEntity(newsId:Int): ArticlesEntity {
+    fun toArticleEntity(newsId: Int, category: String): ArticlesEntity {
         return ArticlesEntity(
             author = author,
             content = content,
@@ -36,7 +36,8 @@ data class ArticleDto(
             title = title,
             url = url,
             urlToImage = urlToImage,
-            newsId = newsId
+            newsId = newsId,
+            category = category,
         )
     }
 }

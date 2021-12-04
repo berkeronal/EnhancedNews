@@ -1,7 +1,9 @@
 package com.berker.enhancednews.data.repository
 
+import com.berker.enhancednews.common.util.Constants
 import com.berker.enhancednews.common.util.Constants.API_KEY
 import com.berker.enhancednews.common.util.Constants.COUNTRY
+import com.berker.enhancednews.common.util.Constants.MAIN_CATEGORY
 import com.berker.enhancednews.common.util.Constants.PAGE_SIZE
 import com.berker.enhancednews.common.util.Resource
 import com.berker.enhancednews.data.local.entity.ArticlesEntity
@@ -37,11 +39,27 @@ class EnhancedNewsRepositoryImpl(
 
         try {
             //ARTİCLERS LİSTESİ TUT SONRA ONU KOMPLE DB YE BAS
+            val articleList = arrayListOf<ArticlesEntity>()
             val remoteNews = api.getNews(
                 country = COUNTRY,
                 apiKey = API_KEY,
-                itemCount = PAGE_SIZE
+                itemCount = PAGE_SIZE,
+                category = MAIN_CATEGORY
             )
+            Constants.Categories.values().forEach { categorie ->
+                val newNews = api.getNews(
+                    country = COUNTRY,
+                    apiKey = API_KEY,
+                    itemCount = PAGE_SIZE,
+                    category = categorie.value
+                )
+
+                articleList.addAll(
+                    newNews.articles.map {
+                        it.toArticleEntity(-1, categorie.value)
+                    }
+                )
+            }
             dao.deleteArticles()
             dao.deleteNews()
             val newNewsObject = NewsEntity(
@@ -51,9 +69,10 @@ class EnhancedNewsRepositoryImpl(
             )
             dao.insertNews(newNewsObject)
             val lastNewsObject = dao.getNews()
-            dao.insertArticles(remoteNews.articles.map {
-                it.toArticleEntity(lastNewsObject.last().id ?: -1)
-            })
+            articleList.forEach {
+                it.newsId = lastNewsObject.last().id ?: -1
+            }
+            dao.insertArticles(articleList)
             //Single Source Of Truth pattern
             val newInsertedNews = dao.getNews()
             val newInsertedArticles = dao.getArticles(newsId = lastNewsObject.last().id ?: -1)
@@ -75,6 +94,15 @@ class EnhancedNewsRepositoryImpl(
                 )
             )
         }
+    }
+
+    override fun getNewsByCategory(category: String): Flow<Resource<List<News>>> = flow {
+        emit(Resource.Loading())
+        val newInsertedNews = dao.getNews()
+        val newInsertedArticles =
+            dao.getArticlesByCategory(category)
+        val readNewNews = getDataFromDb(newInsertedNews, newInsertedArticles)
+        emit(Resource.Success(readNewNews))
     }
 
     private fun getDataFromDb(

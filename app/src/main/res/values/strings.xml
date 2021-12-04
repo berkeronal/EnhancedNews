@@ -5,6 +5,8 @@
     <string name="briefing_content">Get notified when your daily briefing is ready each morning</string>
     <string name="briefing_subscribe">SUBSCRIBE</string>
     <string name="briefing_no_thanks">NO THANKS</string>
+    <string name="settings">SETTINGS</string>
+    <string name="share">SHARE</string>
 
     <style name="rounderCorner">
         <item name="cornerSize">10%</item>
@@ -12,4 +14,5 @@
     </style>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_settings">fragment_settings</string>
 </resources>

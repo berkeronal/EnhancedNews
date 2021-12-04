@@ -5,7 +5,7 @@ import com.berker.enhancednews.common.util.Constants.COUNTRY
 import com.berker.enhancednews.common.util.Constants.PAGE_SIZE
 import com.berker.enhancednews.common.util.Resource
 import com.berker.enhancednews.data.local.entity.ArticlesEntity
-import com.berker.enhancednews.data.local.entity.EnhancedNewsDao
+import com.berker.enhancednews.data.local.entity.NewsDao
 import com.berker.enhancednews.data.local.entity.NewsEntity
 import com.berker.enhancednews.data.remote.NewsApi
 import com.berker.enhancednews.domain.model.News
@@ -17,7 +17,7 @@ import java.io.IOException
 
 class EnhancedNewsRepositoryImpl(
     private val api: NewsApi,
-    private val dao: EnhancedNewsDao
+    private val dao: NewsDao
 ) : EnhancedNewsRepository {
 
     override fun getNews(): Flow<Resource<List<News>>> = flow {
@@ -36,6 +36,7 @@ class EnhancedNewsRepositoryImpl(
         emit(Resource.Loading(data = createdNewsList))
 
         try {
+            //ARTİCLERS LİSTESİ TUT SONRA ONU KOMPLE DB YE BAS
             val remoteNews = api.getNews(
                 country = COUNTRY,
                 apiKey = API_KEY,

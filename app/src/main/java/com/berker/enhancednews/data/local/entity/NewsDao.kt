@@ -4,7 +4,7 @@ import androidx.room.*
 import com.berker.enhancednews.data.local.entity.relations.NewsAndArticles
 
 @Dao
-interface EnhancedNewsDao {
+interface NewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNews(news: NewsEntity)

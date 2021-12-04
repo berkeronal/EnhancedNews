@@ -6,8 +6,10 @@
     <string name="briefing_subscribe">SUBSCRIBE</string>
     <string name="briefing_no_thanks">NO THANKS</string>
 
-    <style name="rounderCorner" >
+    <style name="rounderCorner">
         <item name="cornerSize">10%</item>
         <item name="cornerFamily">rounded</item>
     </style>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

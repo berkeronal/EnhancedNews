@@ -46,7 +46,6 @@ class NewsListViewModel @Inject constructor(
                         )
                     }
                 }
-
             }.launchIn(viewModelScope)
     }
 }

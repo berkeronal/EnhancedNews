@@ -2,7 +2,6 @@ package com.berker.enhancednews.data.remote
 
 import com.berker.enhancednews.data.remote.dto.NewsDto
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NewsApi {

@@ -8,5 +8,17 @@
         android:id="@+id/newsListFragment"
         android:name="com.berker.enhancednews.ui.news.list.NewsListFragment"
         android:label="NewsListFragment"
-        tools:layout="@layout/fragment_news_list" />
+        tools:layout="@layout/fragment_news_list" >
+        <action
+            android:id="@+id/action_newsListFragment_to_newsDetailFragment"
+            app:destination="@id/newsDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.berker.enhancednews.ui.news.detail.NewsDetailFragment"
+        android:label="NewsDetailFragment" >
+        <action
+            android:id="@+id/action_newsDetailFragment_to_newsListFragment"
+            app:destination="@id/newsListFragment" />
+    </fragment>
 </navigation>
